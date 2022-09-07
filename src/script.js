@@ -119,12 +119,12 @@ export const prepareGame = (diff) => {
         }
     }
     let game = {}
-    if (diff === 'easy' || diff === null) {
-        game = boardSize.easy
-    } else if (diff === 'intermediate') {
+    if (diff === 'intermediate') {
         game = boardSize.intermediate
     } else if (diff === 'expert') {
         game = boardSize.expert
+    } else {
+        game = boardSize.easy
     }
     const board = createBoard(game)
     return [game, board]
