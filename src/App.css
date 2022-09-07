@@ -2,20 +2,64 @@ body{
   margin:0;
   padding:0;
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  background-color: rgb(30, 36, 34);
+  color:white
 }
 .main{
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 .board{
+  text-align: center;
+  border: 1px solid black;
+  row-gap: 0px;
+  column-gap: 0px;
+}
+.cell{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  
+}
+.header{
+  height: 50px;
+  text-align: center;
+  width: 100%;
+  position:relative;
+  top:0px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
+}
+.header h1{
+  font-weight: bold;
+  font-size: 1.2rem;
+  align-self: center;
+  color:white
+}
+.options{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
 }
-.cell{
-  border: 1px solid black;
+.options span{
+  font-weight: bold;
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+}
+.buttons button{
+  margin: 5px 0 5px 0;
+  background-color: gray;
+  border-radius: 5px;
+  height: 30px;
+  width: 70px;
 }

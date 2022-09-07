@@ -1,12 +1,10 @@
 import { keyboard } from "@testing-library/user-event/dist/keyboard"
 
 export function createBoard(width = 0, height = 0, mineCount = 0) {
-
-    let arr = new Array(width)
+    let arr = new Array(height)
     for (let i = 0; i < arr.length; i++) {
-        arr[i] = Array(height).fill()
+        arr[i] = Array(width).fill()
     }
-
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             arr[i][j] = {
@@ -20,17 +18,18 @@ export function createBoard(width = 0, height = 0, mineCount = 0) {
 
     let boardWithMines = generateMines(width, height, arr, mineCount)
     let finalBoard = getSurroundingMines(boardWithMines, height, width)
-    console.log(finalBoard, "finalboard")
     return finalBoard
 }
 
 export function generateMines(width = 0, height = 0, data = [], mineCount = 0) {
+
+    console.log(data)
     let currentMineCount = 0;
     while (currentMineCount < mineCount) {
         let randomX = Math.floor(Math.random() * width);
         let randomY = Math.floor(Math.random() * height);
-        if (!data[randomX][randomY].isMine) {
-            data[randomX][randomY].isMine = true;
+        if (!data[randomY][randomX].isMine) {
+            data[randomY][randomX].isMine = true;
             currentMineCount++;
         }
     }
@@ -53,10 +52,9 @@ export function getSurroundingTiles(x = 0, y = 0, data = [], height = 0, width =
     surroundingTiles.forEach(([xx, yy]) => {
         const toCheckY = y - yy;
         const toCheckX = x - xx;
-        console.log(`x=${x}y=${y} || xx=${toCheckX}yy=${toCheckY}`)
-        if (toCheckX >= 0 && toCheckX < width && toCheckY >= 0 && toCheckY < height) {
-            neighbors.push(data[toCheckX][toCheckY])
-            console.log(data[toCheckX][toCheckY], "pushed")
+        if (toCheckX >= 0 && toCheckX < width && toCheckY >=
+            0 && toCheckY < height) {
+            neighbors.push(data[toCheckY][toCheckX])
         }
     })
     return neighbors;
@@ -66,7 +64,7 @@ export const getSurroundingMines = (data = [], height = 0, width = 0) => {
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
             let surroundingMines = 0;
-            let around = getSurroundingTiles(data[i][j].x, data[i][j].y, data, height, width)
+            let around = getSurroundingTiles(data[j][i].x, data[j][i].y, data, height, width)
             around.map(item => {
 
                 if (item.isMine) {
@@ -74,7 +72,7 @@ export const getSurroundingMines = (data = [], height = 0, width = 0) => {
                 }
                 return 0;
             })
-            dataCopy[i][j].minesAround = surroundingMines;
+            dataCopy[j][i].minesAround = surroundingMines;
         }
     }
     return dataCopy;
