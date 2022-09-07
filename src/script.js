@@ -99,5 +99,34 @@ export const getSurroundingFrendlies = (data = [], height = 0, width = 0) => {
         }
     }
     return frens;
+}
+export const getBoardSize = (diff) => {
+
+    const boardSize = {
+        easy: {
+            w: 8,
+            h: 8,
+            mines: 10,
+        },
+        intermediate: {
+            w: 16,
+            h: 16,
+            mines: 40,
+        },
+        expert: {
+            w: 16,
+            h: 30,
+            mines: 99,
+        }
+    }
+    let game = {}
+    if (diff === 'easy' || diff === null) {
+        game = boardSize.easy
+    } else if (diff === 'intermediate') {
+        game = boardSize.intermediate
+    } else if (diff === 'expert') {
+        game = boardSize.expert
+    }
+    return game
 
 }
