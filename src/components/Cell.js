@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const Cell = ({ item, x, y, data }) => {
 
     const state = (tile) => {
-        const { isMine, minesAround, isOpen } = tile
-
+        let { isMine, minesAround, isOpen } = tile
         if (isMine)
             return "💥"
-        if (minesAround != 0)
+        if (minesAround !== 0)
             return minesAround
         if (isOpen)
             return '💪'
     };
+
     return (
-        < div className='cell'> {state(item)} </div >
+        < div className='cell' style={{}}> {state(item)} </div >
     );
 }
 export default Cell;

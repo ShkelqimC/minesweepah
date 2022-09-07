@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Board from './Board'
 import Counter from './Counter'
+import { v4 as uuidv4 } from 'uuid';
+
+
 const Menu = () => {
     const [diff, setDiff] = useState("easy")
     const [gamestate, setGamestate] = useState({ playing: false, timerOn: false })
@@ -31,9 +34,8 @@ const Menu = () => {
                     <div className='checkBoxes'>
 
                         {difficulties.map(diff => {
-                            console.log(diff, "d")
                             return (
-                                <button style={{ background: (diff === 'easy' ? 'green' : (diff === 'intermediate' ? 'orange' : 'red')) }} onClick={((e) => btnStart(e))} value={diff}> {diff.charAt(0).toUpperCase() + diff.slice(1)} </button>
+                                <button key={uuidv4()} style={{ background: (diff === 'easy' ? 'green' : (diff === 'intermediate' ? 'orange' : 'red')) }} onClick={((e) => btnStart(e))} value={diff}> {diff.charAt(0).toUpperCase() + diff.slice(1)} </button>
                             )
                         })}
                     </div>

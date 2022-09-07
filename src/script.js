@@ -23,7 +23,6 @@ export function createBoard({ w: width = 0, h: height = 0, mines: mineCount = 0 
 
 export function generateMines(width = 0, height = 0, data = [], mineCount = 0) {
 
-    console.log(data)
     let currentMineCount = 0;
     while (currentMineCount < mineCount) {
         let randomX = Math.floor(Math.random() * width);
@@ -128,7 +127,5 @@ export const prepareGame = (diff) => {
         game = boardSize.expert
     }
     const board = createBoard(game)
-    console.log(game, "game")
-    console.log(board, "board")
     return [game, board]
 }

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { getBoardSize, prepareGame } from '../script';
+import { prepareGame } from '../script';
 import Cell from './Cell'
 import '../App.css'
 import { v4 as uuidv4 } from 'uuid';
 
 const Board = ({ diff }) => {
     const [game, board] = prepareGame(diff);
-    const [field, setField] = useState(board);
+    const [field] = useState(board);
 
 
     return (
