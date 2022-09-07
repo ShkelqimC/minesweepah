@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Board from './Board'
 import Counter from './Counter'
 const Menu = () => {
-    const [isShown, setIsShown] = useState(false)
     const [diff, setDiff] = useState("")
     const [gamestate, setGamestate] = useState({ playing: false, timerOn: false })
 
@@ -12,6 +11,12 @@ const Menu = () => {
         setGamestate({
             playing: true,
             timerOn: true,
+        })
+    }
+    const btnReset = (e) => {
+        setGamestate({
+            playing: false,
+            timerOn: false,
         })
     }
 
@@ -60,18 +65,10 @@ const Menu = () => {
             }
             <div className='buttons'>
                 {gamestate.playing && (<Board diff={diff} />)}
-                {gamestate.playing && (<button className='resetBtn'>Reset</button>)}
+                {gamestate.playing && (<button className='resetBtn' onClick={btnReset}>Reset</button>)}
             </div>
         </div>
     );
-}
-const Checkbox = ({ label, value, onChange }) => {
-    return (
-        <label>
-            <input type="checkbox" checked={value} onChange={onChange} />
-            {label}
-        </label>
-    )
 }
 
 export default Menu;
