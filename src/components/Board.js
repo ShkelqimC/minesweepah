@@ -32,7 +32,7 @@ const Board = ({ diff }) => {
         game = boardSize.expert
     }
     console.log(game, "game")
-    let board = createBoard(game.w, game.h, game.mines)
+    let board = createBoard(game.h, game.w, game.mines)
     // let boardWithMines = generateMines(game.w, game.h, board, game.mines)
     // let finalBoard = getSurroundingMines(boardWithMines, game.h, game.w)
     return (
@@ -46,6 +46,8 @@ const Board = ({ diff }) => {
                 {
                     board.map((row, y) => row.map((col, x) => <Cell className="cell"
                         item={col}
+                        data={board}
+                        game={game}
                         key={`${x}-${y}`}
                     />))
                 }

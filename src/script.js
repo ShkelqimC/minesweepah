@@ -11,11 +11,11 @@ export function createBoard(width = 0, height = 0, mineCount = 0) {
                 x: i,
                 y: j,
                 isMine: false,
-                minesAround: 0
+                minesAround: 0,
+                isOpen: false
             }
         }
     }
-
     let boardWithMines = generateMines(width, height, arr, mineCount)
     let finalBoard = getSurroundingMines(boardWithMines, height, width)
     return finalBoard
@@ -36,7 +36,7 @@ export function generateMines(width = 0, height = 0, data = [], mineCount = 0) {
     return data
 }
 
-export function getSurroundingTiles(x = 0, y = 0, data = [], height = 0, width = 0) {
+export function getSurroundingTiles(y = 0, x = 0, data = [], height = 0, width = 0) {
     let surroundingTiles = [
         [-1, -1],// northwest
         [0, -1], //north
@@ -61,8 +61,8 @@ export function getSurroundingTiles(x = 0, y = 0, data = [], height = 0, width =
 }
 export const getSurroundingMines = (data = [], height = 0, width = 0) => {
     let dataCopy = data;
-    for (let i = 0; i < width; i++) {
-        for (let j = 0; j < height; j++) {
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
             let surroundingMines = 0;
             let around = getSurroundingTiles(data[i][j].x, data[i][j].y, data, height, width)
             around.map(item => {
@@ -72,8 +72,28 @@ export const getSurroundingMines = (data = [], height = 0, width = 0) => {
                 }
                 return 0;
             })
-            dataCopy[j][i].minesAround = surroundingMines;
+            dataCopy[i][j].minesAround = surroundingMines;
         }
     }
     return dataCopy;
+}
+
+export const getSurroundingFrendlies = (data = [], height = 0, width = 0) => {
+    let frens = []
+    let dataCopy = data;
+    for (let i = 0; i < width; i++) {
+        for (let j = 0; j < height; j++) {
+            let surroundingMines = 0;
+            let around = getSurroundingTiles(data[i][j].x, data[i][j].y, data, height, width)
+            around.map(item => {
+
+                if (item.minesAround <= 1) {
+                    frens.push(item)
+                }
+            })
+            dataCopy[j][i].minesAround = surroundingMines;
+        }
+    }
+    return frens;
+
 }
