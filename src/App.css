@@ -14,8 +14,9 @@ body{
   min-height: 100vh;
 }
 .board{
+  display: flex;
+  justify-content: center;
   text-align: center;
-  border: 1px solid black;
   row-gap: 0px;
   column-gap: 0px;
 }
@@ -43,7 +44,7 @@ body{
   align-self: center;
   color:white
 }
-.options{
+.outer{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,11 +56,24 @@ body{
 .buttons{
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;;
 }
-.buttons button{
+.btnPlay{
   margin: 5px 0 5px 0;
   background-color: gray;
   border-radius: 5px;
   height: 30px;
   width: 70px;
+}
+.resetBtn{
+  margin-top: 5px;
+  width: 100px;
+  height: 30px;
+  align-self: center;
+  background-color: gray;
+  border-radius: 5px;
+}
+.outer{
+  text-align: center;
 }

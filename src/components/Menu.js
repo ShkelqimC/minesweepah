@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import Board from './Board'
-
+import Counter from './Counter'
 const Menu = () => {
     const [isShown, setIsShown] = useState(false)
     const [diff, setDiff] = useState("")
+    const [gamestate, setGamestate] = useState({ playing: false, timerOn: false })
+
 
 
     const btnStart = (e) => {
-        setIsShown(current => !current)
+        setGamestate({
+            playing: true,
+            timerOn: true,
+        })
     }
 
     const handleChange = event => {
@@ -16,38 +21,47 @@ const Menu = () => {
 
 
     return (
-        <div className='options'>
-            <span>Choose difficulty</span>
-            <div className='checkBoxes'>
-                <input type="radio"
-                    value="easy"
-                    name="difficulty"
-                    onChange={handleChange}
-                />
-                <span style={{ color: 'green' }}>Easy</span>
 
-                <input
-                    type="radio"
-                    value="intermediate"
-                    name="difficulty"
-                    onChange={handleChange}
-                />
-                <span style={{ color: 'orange' }}>intermediate</span>
+        <div className='outer'>
+            {gamestate.playing && (<Counter />)}
+            {!gamestate.playing &&
+                <div className='options'>
+                    <span>Choose difficulty</span>
+                    <div className='checkBoxes'>
+                        <input type="radio"
+                            value="easy"
+                            name="difficulty"
+                            onChange={handleChange}
+                        />
+                        <span style={{ color: 'green' }}>Easy</span>
 
-                <input
-                    type="radio"
-                    value="expert"
-                    name="difficulty"
-                    onChange={handleChange}
-                />
-                <span style={{ color: 'Red' }}>Expert</span>
+                        <input
+                            type="radio"
+                            value="intermediate"
+                            name="difficulty"
+                            onChange={handleChange}
+                        />
+                        <span style={{ color: 'orange' }}>intermediate</span>
+
+                        <input
+                            type="radio"
+                            value="expert"
+                            name="difficulty"
+                            onChange={handleChange}
+                        />
+                        <span style={{ color: 'Red' }}>Expert</span>
 
 
-            </div>
+
+
+                    </div>
+                    <button className='btnPlay' onClick={btnStart}>PLAY</button>
+                </div>
+            }
             <div className='buttons'>
-                <button onClick={btnStart}>PLAY</button>
+                {gamestate.playing && (<Board diff={diff} />)}
+                {gamestate.playing && (<button className='resetBtn'>Reset</button>)}
             </div>
-            {isShown && (<Board diff={diff} />)}
         </div>
     );
 }
