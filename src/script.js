@@ -64,7 +64,7 @@ export const getSurroundingMines = (data = [], height = 0, width = 0) => {
     for (let i = 0; i < width; i++) {
         for (let j = 0; j < height; j++) {
             let surroundingMines = 0;
-            let around = getSurroundingTiles(data[j][i].x, data[j][i].y, data, height, width)
+            let around = getSurroundingTiles(data[i][j].x, data[i][j].y, data, height, width)
             around.map(item => {
 
                 if (item.isMine) {
