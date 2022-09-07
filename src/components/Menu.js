@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import Board from './Board'
 import Counter from './Counter'
 const Menu = () => {
-    let difficulties = ['easy', 'intermediate', ' expert']
     const [diff, setDiff] = useState("easy")
     const [gamestate, setGamestate] = useState({ playing: false, timerOn: false })
 
 
-
     const btnStart = (e) => {
+        setDiff((e.target.value))
         setGamestate({
             playing: true,
             timerOn: true,
@@ -21,13 +20,8 @@ const Menu = () => {
         })
     }
 
-    const handleChange = event => {
-        setDiff(event.target.value);
-    };
-
-
+    let difficulties = ['easy', 'intermediate', 'expert']
     return (
-
         <div className='outer'>
             {gamestate.playing && (<Counter />)}
             {!gamestate.playing &&
@@ -35,29 +29,13 @@ const Menu = () => {
                 <div className='options'>
                     <span>Choose difficulty</span>
                     <div className='checkBoxes'>
-                        <input type="radio"
-                            value="easy"
-                            name="difficulty"
-                            onChange={handleChange}
-                        />
-                        <span style={{ color: 'green' }}>Easy</span>
 
-                        <input
-                            type="radio"
-                            value="intermediate"
-                            name="difficulty"
-                            onChange={handleChange}
-                        />
-                        <span style={{ color: 'orange' }}>intermediate</span>
-
-                        <input
-                            type="radio"
-                            value="expert"
-                            name="difficulty"
-                            onChange={handleChange}
-                        />
-                        <span style={{ color: 'Red' }}>Expert</span>
-
+                        {difficulties.map(diff => {
+                            console.log(diff, "d")
+                            return (
+                                <button style={{ background: (diff === 'easy' ? 'green' : (diff === 'intermediate' ? 'orange' : 'red')) }} onClick={((e) => btnStart(e))} value={diff}> {diff.charAt(0).toUpperCase() + diff.slice(1)} </button>
+                            )
+                        })}
                     </div>
                     <button className='btnPlay' onClick={btnStart}>PLAY</button>
                 </div>

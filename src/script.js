@@ -1,6 +1,5 @@
-import { keyboard } from "@testing-library/user-event/dist/keyboard"
 
-export function createBoard(width = 0, height = 0, mineCount = 0) {
+export function createBoard({ w: width = 0, h: height = 0, mines: mineCount = 0 }) {
     let arr = new Array(height)
     for (let i = 0; i < arr.length; i++) {
         arr[i] = Array(width).fill()
@@ -94,13 +93,14 @@ export const getSurroundingFrendlies = (data = [], height = 0, width = 0) => {
                 if (item.minesAround <= 1) {
                     frens.push(item)
                 }
+                return 0;
             })
             dataCopy[j][i].minesAround = surroundingMines;
         }
     }
     return frens;
 }
-export const getBoardSize = (diff) => {
+export const prepareGame = (diff) => {
 
     const boardSize = {
         easy: {
@@ -127,6 +127,8 @@ export const getBoardSize = (diff) => {
     } else if (diff === 'expert') {
         game = boardSize.expert
     }
-    return game
-
+    const board = createBoard(game)
+    console.log(game, "game")
+    console.log(board, "board")
+    return [game, board]
 }
