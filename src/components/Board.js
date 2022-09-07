@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createBoard } from '../script';
 import Cell from './Cell'
 import '../App.css'
+import { v4 as uuidv4 } from 'uuid';
 
 const Board = ({ diff }) => {
     const boardSize = {
@@ -29,10 +30,19 @@ const Board = ({ diff }) => {
     } else if (diff === 'expert') {
         game = boardSize.expert
     }
-    console.log(game, "game")
     let board = createBoard(game.h, game.w, game.mines)
-    // let boardWithMines = generateMines(game.w, game.h, board, game.mines)
-    // let finalBoard = getSurroundingMines(boardWithMines, game.h, game.w)
+    const [field, setField] = useState(board);
+
+    const handleClick = (e, x, y) => {
+        debugger
+        e.preventDefault()
+        console.log(e, "e")
+        console.log(x, "x")
+        console.log(y, "y")
+        board[y][x].isOpen = true;
+        console.log(board[y][x], "board x y")
+    }
+
     return (
         <div>
             <div className="board" style={{
@@ -42,11 +52,14 @@ const Board = ({ diff }) => {
 
             }}>
                 {
-                    board.map((row, y) => row.map((col, x) => <Cell className="cell"
+                    field.map((row, y) => row.map((col, x) => <Cell className="cell"
+                        handleClick={(e, y, x) => handleClick(e, y, x)}
+                        x={x}
+                        y={y}
                         item={col}
                         data={board}
                         game={game}
-                        key={`${x}-${y}`}
+                        key={uuidv4()}
                     />))
                 }
 

@@ -12,7 +12,8 @@ export function createBoard(width = 0, height = 0, mineCount = 0) {
                 y: j,
                 isMine: false,
                 minesAround: 0,
-                isOpen: false
+                isOpen: false,
+                noMinesAround: false,
             }
         }
     }
@@ -72,6 +73,9 @@ export const getSurroundingMines = (data = [], height = 0, width = 0) => {
                 }
                 return 0;
             })
+            if (surroundingMines === 0) {
+                dataCopy[i][j].noMinesAround = true;
+            }
             dataCopy[i][j].minesAround = surroundingMines;
         }
     }
