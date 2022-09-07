@@ -13,7 +13,7 @@ const Cell = ({ item, x, y, data }) => {
     };
 
     return (
-        < div className='cell' style={{}}> {state(item)} </div >
+        < div className='cell' style={{ color: `${state(item) == 1 ? "blue" : state(item) == 2 ? "green" : state(item) == 3 ? "purple" : "black"}` }}> {state(item)} </div >
     );
 }
 export default Cell;

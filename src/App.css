@@ -16,8 +16,8 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid gray;
-  
+  border: 1px solid white;
+  background-color: gray;
 }
 .header{
   width: 100%;
