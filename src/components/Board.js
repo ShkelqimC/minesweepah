@@ -4,8 +4,6 @@ import Cell from './Cell'
 import '../App.css'
 
 const Board = ({ diff }) => {
-    console.log(diff, "diff")
-
     const boardSize = {
         easy: {
             w: 8,
@@ -24,7 +22,7 @@ const Board = ({ diff }) => {
         }
     }
     let game = {}
-    if (diff === 'easy') {
+    if (diff === 'easy' || diff === null) {
         game = boardSize.easy
     } else if (diff === 'intermediate') {
         game = boardSize.intermediate

@@ -2,7 +2,25 @@ import React, { useState, useEffect } from 'react';
 
 const Counter = () => {
     const [sCounter, setSCounter] = useState(0);
-    const [msCounter, setmsCounter] = useState(0);
+    const [msCounter, setmsCounter] = useState(1);
+
+    const [time, setTime] = useState(0);
+    const [running, setRunning] = useState(false);
+
+
+    useEffect(() => {
+        let interval;
+        if (running) {
+            interval = setInterval(() => {
+                setTime((prevTime) => prevTime + 10);
+            }, 10);
+        } else if (!running) {
+            setRunning(!running);
+        }
+        return () => clearInterval(interval);
+    }, [running]);
+
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -12,10 +30,9 @@ const Counter = () => {
     })
     useEffect(() => {
         setTimeout(() => {
-            if (msCounter < 9) {
+            if (msCounter < 10) {
                 setmsCounter(msCounter + 1)
             } else {
-
                 setmsCounter(0)
             }
 
@@ -25,7 +42,8 @@ const Counter = () => {
 
     return (
         <div>
-            Time: {sCounter}:{msCounter}
+            <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
+            <span>{("0" + ((time / 10) % 100)).slice(-2)}</span>
         </div>
     );
 }

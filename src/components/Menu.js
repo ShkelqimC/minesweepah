@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Board from './Board'
 import Counter from './Counter'
 const Menu = () => {
-    const [diff, setDiff] = useState("")
+    let difficulties = ['easy', 'intermediate', ' expert']
+    const [diff, setDiff] = useState("easy")
     const [gamestate, setGamestate] = useState({ playing: false, timerOn: false })
 
 
@@ -30,6 +31,7 @@ const Menu = () => {
         <div className='outer'>
             {gamestate.playing && (<Counter />)}
             {!gamestate.playing &&
+
                 <div className='options'>
                     <span>Choose difficulty</span>
                     <div className='checkBoxes'>
@@ -55,9 +57,6 @@ const Menu = () => {
                             onChange={handleChange}
                         />
                         <span style={{ color: 'Red' }}>Expert</span>
-
-
-
 
                     </div>
                     <button className='btnPlay' onClick={btnStart}>PLAY</button>
